@@ -9,6 +9,8 @@ function ProductList() {
     const [addedToCart, setAddedToCart] = useState({});
     const dispatch = useDispatch();
 
+    const cartItems = useSelector((state) => state.cart.items);
+
     // Array of plants with categories
     const plantsArray = [
         {
@@ -247,9 +249,24 @@ function ProductList() {
 
     return (
         <div>
-            <div className="navbar" style={{ backgroundColor: '#4CAF50', color: '#fff', padding: '15px', display: 'flex', justifyContent: 'space-between', alignItems: 'center', fontSize: '20px' }}>
+            <div
+                className="navbar"
+                style={{
+                    backgroundColor: '#4CAF50',
+                    color: '#fff',
+                    padding: '10px',
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    alignItems: 'center',
+                    fontSize: '18px',
+                }}
+            >
                 <div className="luxury">
-                    <img src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png" alt="" />
+                    <img
+                        src="https://cdn.pixabay.com/photo/2020/08/05/13/12/eco-5465432_1280.png"
+                        alt=""
+                        style={{ height: '50px', width: '50px' }} // Reduce image size
+                    />
                     <a href="/" style={{ textDecoration: 'none' }}>
                         <div>
                             <h3 style={{ color: 'white' }}>Paradise Nursery</h3>
@@ -257,19 +274,21 @@ function ProductList() {
                         </div>
                     </a>
                 </div>
-                <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', width: '1100px' }}>
-                    <div>
-                        <a href="#" onClick={handlePlantsClick} style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }}>Plants</a>
-                    </div>
-                    <div>
-                        <a href="#" onClick={handleCartClick} style={{ color: 'white', fontSize: '30px', textDecoration: 'none' }}>
-                            <h1 className="cart">
-                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" height="68" width="68">
-                                    <path d="M42.3,72H221.7l-26.4,92.4A15.9,15.9,0,0,1,179.9,176H84.1a15.9,15.9,0,0,1-15.4-11.6L32.5,37.8A8,8,0,0,0,24.8,32H8" fill="none" stroke="#faf9f9" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path>
-                                </svg>
-                            </h1>
-                        </a>
-                    </div>
+                <div style={{ display: 'flex', alignItems: 'center' }}>
+                    <a
+                        href="#"
+                        onClick={handlePlantsClick}
+                        style={{ color: 'white', fontSize: '20px', textDecoration: 'none' }}
+                    >
+                        Plants
+                    </a>
+                    <a
+                        href="#"
+                        onClick={handleCartClick}
+                        style={{ color: 'white', fontSize: '20px', textDecoration: 'none', marginLeft: '20px' }}
+                    >
+                        Cart ({cartItems.length})
+                    </a>
                 </div>
             </div>
 
@@ -281,7 +300,12 @@ function ProductList() {
                             <div className="product-list">
                                 {category.plants.map((plant, plantIndex) => (
                                     <div className="product-card" key={plantIndex}>
-                                        <img className="product-image" src={plant.image} alt={plant.name} />
+                                        <img
+                                            className="product-image"
+                                            src={plant.image}
+                                            alt={plant.name}
+                                            style={{ height: '150px', width: '150px' }} // Reduce image size
+                                        />
                                         <div className="product-title">{plant.name}</div>
                                         <div className="product-description">{plant.description}</div>
                                         <div className="product-cost">{plant.cost}</div>
@@ -299,7 +323,10 @@ function ProductList() {
                     ))}
                 </div>
             ) : (
-                <CartItem onContinueShopping={handleContinueShopping} />
+                <CartItem
+                    cartItems={cartItems} // Pass cart items to the CartItem component
+                    onContinueShopping={handleContinueShopping}
+                />
             )}
         </div>
     );

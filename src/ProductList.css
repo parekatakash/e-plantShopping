@@ -14,7 +14,7 @@ body {
 .navbar {
     background-color: #4CAF50;
     color: #fff!important;
-    padding: 15px;
+    padding: 5px;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -157,7 +157,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 650px;
+    width: 450px;
     font-size: 19px;
 }
 .cart{

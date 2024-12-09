@@ -26,7 +26,14 @@ const CartItem = ({ onContinueShopping }) => {
   };
 
   const handleRemove = (item) => {
+    dispatch(removeItem(item.name)); // Dispatch action to remove the item
   };
+
+  const handleQuantityChange = (e) => {
+    const newQuantity = parseInt(e.target.value, 10);
+    dispatch(updateQuantity({ name: item.name, quantity: newQuantity })); // Dispatch action to update quantity
+  };
+
 
   // Calculate total cost based on quantity for an item
   const calculateTotalCost = (item) => {
@@ -59,6 +66,18 @@ const CartItem = ({ onContinueShopping }) => {
         <br />
         <button className="get-started-button1">Checkout</button>
       </div>
+      <div>
+      <h3>{item.name}</h3>
+      <p>{item.cost}</p>
+      <img src={item.image} alt={item.name} />
+      <input
+        type="number"
+        value={item.quantity}
+        onChange={handleQuantityChange}
+        min="1"
+      />
+      <button onClick={handleRemove}>Remove</button>
+    </div>
     </div>
   );
 };
